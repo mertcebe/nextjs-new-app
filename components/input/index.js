@@ -1,26 +1,18 @@
 "use client";
 import React, { useState } from 'react'
 import style from './page.module.css'
-import Link from 'next/link';
+import Button from '../button';
 
-const Input = () => {
-    let [uid, setUid] = useState('');
-    let [name, setName] = useState('');
+const Input = ({children}) => {
+    let [text, setText] = useState();
+    console.log('input');
     return (
         <>
-            <input type="text" value={uid} className={style.userInput} onChange={(e) => {
-                setUid(e.target.value);
-            }} placeholder='uid' />
-            <input type="text" value={name} className={style.userInput} onChange={(e) => {
-                setName(e.target.value);
-            }} placeholder='name' />
-            {
-                uid && name &&
-                <Link href={`/users/${uid}?name=${name}`} onClick={() => {
-                    setUid('');
-                    setName('');
-                }}>Go to user</Link>
-            }
+            <input type="text" className={style.userInput} onChange={(e) => {
+                setText(e.target.value);
+            }} placeholder='id' />
+            {children}
+            <Button id={Number(text)} />
         </>
     )
 }

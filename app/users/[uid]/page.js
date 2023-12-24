@@ -1,15 +1,24 @@
+"use client";
+import { getUser } from '@/components/button';
 import { notFound } from 'next/navigation';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const page = async ({ params, searchParams }) => {
-    if(searchParams.name === 'not'){
+    let [user, setUser] = useState();
+    useEffect(() => {
+        getUser(params.uid)
+            .then((snapshot) => {
+                setUser(snapshot);
+            })
+    }, []);
+    if (searchParams.name === 'not') {
         notFound();
     }
     return (
         <div>
-            User name: {searchParams.name}
+            User name: {user?.name}
             <br />
-            User uid: {params.uid}
+            User uid: {user?.id}
         </div>
     )
 }
