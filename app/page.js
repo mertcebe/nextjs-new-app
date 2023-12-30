@@ -1,25 +1,15 @@
-"use client";
-import { useEffect, useState } from 'react';
+import Link from 'next/link'
 import styles from './page.module.css'
-import Input from '@/components/input';
-import { getUser } from '@/components/button';
 
 export default function Home() {
-  let [user, setUser] = useState();
-  console.log('home');
-  useEffect(() => {
-    getUser(3)
-    .then((snapshot) => {
-      setUser(snapshot);
-    })
-  }, []);
   return (
     <main className={styles.main}>
       <div>
         main page
+        <Link href={'/fetch-dynamic'}>fetchDynamic</Link>
+        <Link href={'/fetch-revalidate'}>fetchRevalidate</Link>
+        <Link href={'/fetch-static'}>fetchStatic</Link>
       </div>
-      <Input />
-      {user?user.name:''}
     </main>
   )
 }

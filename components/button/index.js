@@ -1,6 +1,7 @@
 "use client";
 import React from 'react'
 import Input from '../input';
+import Link from 'next/link';
 
 export const getUser = async (id) => {
     const data = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
@@ -10,10 +11,7 @@ export const getUser = async (id) => {
 const Button = ({id}) => {
     return (
         <>
-            <button onClick={async () => {
-                const data = await getUser(id);
-                console.log(data);
-            }}>open</button>
+            <Link href={`/users/${id}`} style={{pointerEvents: id?'all':"none"}}>open</Link>
         </>
     )
 }

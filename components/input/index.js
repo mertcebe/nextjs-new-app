@@ -2,17 +2,19 @@
 import React, { useState } from 'react'
 import style from './page.module.css'
 import Button from '../button';
+import Link from 'next/link';
 
-const Input = ({children}) => {
-    let [text, setText] = useState();
-    console.log('input');
+const Input = ({ children }) => {
+    let [id, setId] = useState();
     return (
         <>
             <input type="text" className={style.userInput} onChange={(e) => {
-                setText(e.target.value);
+                setId(e.target.value);
             }} placeholder='id' />
-            {children}
-            <Button id={Number(text)} />
+            <Link href={{
+                pathname: `/users/${id}`,
+                query: { type: 'search' }
+            }} prefetch={true}>go to profile</Link>
         </>
     )
 }
